@@ -22,7 +22,8 @@ namespace WindowsGame2
         Terrain1 terain1;
         public Game1()
         {
-            terain1 = new Terrain1();
+            terain1 = new Terrain1("Grass");
+            
             hero = new Sprites();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -43,9 +44,11 @@ namespace WindowsGame2
         {
             terain1.TFill();
             terain1.TLoadTexture(Content);
+            terain1.points[5, 5].LoadContent(Content, "GrassWithRock");
+            terain1.points[5, 5].CanGo = false;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            hero.LoadContent(Content, " вадрат");
-
+            hero.LoadContent(Content, "–ыц¬лево");
+           
         }
 
 
@@ -66,11 +69,13 @@ namespace WindowsGame2
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X + 50) / 50f), Convert.ToInt32(hero.spritePosition.Y / 50f)].CanGo)
                     {
                         hero.spritePosition.X += 50;
+                        hero.spriteTexture = Content.Load<Texture2D>("–ыц¬право");
                     }
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Right))
                 {
                     a = true;
+                    
                 }
             }
             catch
@@ -86,6 +91,7 @@ namespace WindowsGame2
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X - 50) / 50f), Convert.ToInt32(hero.spritePosition.Y / 50f)].CanGo)
                     {
                         hero.spritePosition.X -= 50;
+                        hero.spriteTexture = Content.Load<Texture2D>("–ыц¬лево");
                     }
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Left))
@@ -139,6 +145,8 @@ namespace WindowsGame2
 
             }
             #endregion
+
+
 
             base.Update(gameTime);
         }

@@ -13,6 +13,13 @@ namespace WindowsGame2
 {
     public class Terrain1
     {
+
+        string texture;
+        public Terrain1(string texture)
+        {
+            this.texture = texture;
+        }
+
         public TPoint[,] points = new TPoint[16,12];
         public  void TFill()
         {
@@ -47,7 +54,7 @@ namespace WindowsGame2
             {
                 for (int f = 0; f < 12; f++)
                 {
-                    this.points[i, f].LoadContent(Content, "Grass");
+                    this.points[i, f].LoadContent(Content, this.texture);
                 }
             }
         }

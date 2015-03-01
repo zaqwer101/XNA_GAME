@@ -21,7 +21,7 @@ namespace WindowsGame2
 
         public void LoadContent(ContentManager Content, String texture)
         {
-            spriteTexture = Content.Load<Texture2D>(texture);
+            this.spriteTexture = Content.Load<Texture2D>(texture);
         }
 
         public void Draw(SpriteBatch spriteBatch)
