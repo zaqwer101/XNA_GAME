@@ -15,11 +15,11 @@ namespace WindowsGame2
 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        public bool a = true, b = true, c = true, d = true;
+        public bool right = true, left = true, down = true, up = true, TAB = true;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Sprites hero;
-        Terrain1 terain1;
+        public static Sprites hero;
+        public static Terrain1 terain1;
         public static List<Sprites> sprites = new List<Sprites>();
         public Game1()
         {
@@ -46,7 +46,8 @@ namespace WindowsGame2
             terain1.TFill();
             terain1.TLoadTexture(Content);
             Random rnd = new Random();
-            for (int i = 0; i < rnd.Next(20);i++)
+            int z = rnd.Next(20)+10;
+            for (int i = 0; i < z;i++)
             {
                 sprites.Add(new Sprites());
                 sprites[i].LoadContent(Content, "Tree1");
@@ -60,11 +61,10 @@ namespace WindowsGame2
                         y = rnd.Next(12);
                     }
                 }
-                    sprites[i].spritePosition = new Vector2(x * 50, y * 50);
+                sprites[i].spritePosition = new Vector2(x * 50, y * 50);
                 terain1.points[x, y].CanGo = false;
+                terain1.points[x, y].name = "Дерево";
             }
-
-
                 spriteBatch = new SpriteBatch(GraphicsDevice);
             hero.LoadContent(Content, "РыцВлево");
            
@@ -78,13 +78,14 @@ namespace WindowsGame2
 
         protected override void Update(GameTime gameTime)
         {
+
             #region Обработчик движения игрока
             // Вправо
             try
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Right) & a)
+                if (Keyboard.GetState().IsKeyDown(Keys.Right) & right)
                 {
-                    a = false;
+                    right = false;
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X + 50) / 50f), Convert.ToInt32(hero.spritePosition.Y / 50f)].CanGo)
                     {
                         hero.spritePosition.X += 50;
@@ -93,8 +94,7 @@ namespace WindowsGame2
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Right))
                 {
-                    a = true;
-                    
+                    right = true;
                 }
             }
             catch
@@ -104,9 +104,9 @@ namespace WindowsGame2
             // Влево
             try
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Left) & b)
+                if (Keyboard.GetState().IsKeyDown(Keys.Left) & left)
                 {
-                    b = false;
+                    left = false;
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X - 50) / 50f), Convert.ToInt32(hero.spritePosition.Y / 50f)].CanGo)
                     {
                         hero.spritePosition.X -= 50;
@@ -115,7 +115,7 @@ namespace WindowsGame2
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Left))
                 {
-                    b = true;
+                    left = true;
                 }
             }
             catch
@@ -125,9 +125,9 @@ namespace WindowsGame2
             // Вниз
             try
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Down) & c)
+                if (Keyboard.GetState().IsKeyDown(Keys.Down) & down)
                 {
-                    c = false;
+                    down = false;
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X / 50f)), Convert.ToInt32((hero.spritePosition.Y + 50) / 50f)].CanGo)
                     {
                         hero.spritePosition.Y += 50;
@@ -135,7 +135,7 @@ namespace WindowsGame2
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Down))
                 {
-                    c = true;
+                    down = true;
                 }
             }
             catch
@@ -146,9 +146,9 @@ namespace WindowsGame2
             // Вверх
             try
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Up) & d)
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) & up)
                 {
-                    d = false;
+                    up = false;
                     if (terain1.points[Convert.ToInt32((hero.spritePosition.X / 50f)), Convert.ToInt32((hero.spritePosition.Y - 50) / 50f)].CanGo)
                     {
                         hero.spritePosition.Y -= 50;
@@ -156,16 +156,28 @@ namespace WindowsGame2
                 }
                 if (Keyboard.GetState().IsKeyUp(Keys.Up))
                 {
-                    d = true;
+                    up = true;
                 }
             }
             catch
             {
 
             }
+
+            // Инвентарь
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab) & TAB)
+            {
+                TAB = false;
+                //DO SMTH
+                Action act = new Action();
+                act.ShowDialog();
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Tab))
+            {
+                TAB = true;
+            }
             #endregion
-
-
 
             base.Update(gameTime);
         }

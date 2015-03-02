@@ -14,5 +14,7 @@ namespace WindowsGame2
     public class TPoint : Sprites
     {
         public bool CanGo = true; //Можно ли встать в точку
+        
+
     }
 }
