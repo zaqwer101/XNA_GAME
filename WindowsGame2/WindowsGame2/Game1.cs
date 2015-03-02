@@ -20,6 +20,7 @@ namespace WindowsGame2
         SpriteBatch spriteBatch;
         Sprites hero;
         Terrain1 terain1;
+        public static List<Sprites> sprites = new List<Sprites>();
         public Game1()
         {
             terain1 = new Terrain1("Grass");
@@ -44,9 +45,27 @@ namespace WindowsGame2
         {
             terain1.TFill();
             terain1.TLoadTexture(Content);
-            terain1.points[5, 5].LoadContent(Content, "GrassWithRock");
-            terain1.points[5, 5].CanGo = false;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            Random rnd = new Random();
+            for (int i = 0; i < rnd.Next(20);i++)
+            {
+                sprites.Add(new Sprites());
+                sprites[i].LoadContent(Content, "Tree1");
+                int x = rnd.Next(16);
+                int y = rnd.Next(12);
+                for (int f = 0; f < sprites.Count;f++)
+                {
+                    if((x == sprites[i].spritePosition.X & y==sprites[i].spritePosition.Y) || (x==0 & y==0) )
+                    {
+                        x = rnd.Next(16);
+                        y = rnd.Next(12);
+                    }
+                }
+                    sprites[i].spritePosition = new Vector2(x * 50, y * 50);
+                terain1.points[x, y].CanGo = false;
+            }
+
+
+                spriteBatch = new SpriteBatch(GraphicsDevice);
             hero.LoadContent(Content, "ÐûöÂëåâî");
            
         }
@@ -157,9 +176,14 @@ namespace WindowsGame2
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            terain1.TDraw(spriteBatch);
-            hero.Draw(spriteBatch);
 
+
+                terain1.TDraw(spriteBatch);
+            hero.Draw(spriteBatch);
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                sprites[i].Draw(spriteBatch);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }
