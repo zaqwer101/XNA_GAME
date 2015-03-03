@@ -7,8 +7,8 @@ namespace WindowsGame2
 {
     public class Item
     {
-        string name;
-        float weight;
+        public string name;
+        public float weight;
 
         public Item(string name, float weight)
         {

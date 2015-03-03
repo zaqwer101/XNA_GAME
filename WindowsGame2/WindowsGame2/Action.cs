@@ -23,6 +23,7 @@ namespace WindowsGame2
                 button1.Show();
                 button1.Text = "Срубить дерево";
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,7 +83,8 @@ namespace WindowsGame2
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Inventory inv = new Inventory();
+            inv.ShowDialog();
         }
 
         private void button3_Click(object sender, EventArgs e)

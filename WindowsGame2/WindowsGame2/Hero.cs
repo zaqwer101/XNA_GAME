@@ -8,7 +8,7 @@ namespace WindowsGame2
     public class Hero : Sprites
     {
         public List<Item> items = new List<Item>();
-
+        public static int c = 0;
         public void ChopChop()
         {
             switch (Program.hero.LocateNear("Дерево"))
@@ -56,9 +56,12 @@ namespace WindowsGame2
                     }
                     break;
                 default:
-
                     break;
             }
+
+            items.Add(new Item_material("Wood",0.5f));
+            items[c].name = "дерево";
+            c++;
         }
     }
 }
