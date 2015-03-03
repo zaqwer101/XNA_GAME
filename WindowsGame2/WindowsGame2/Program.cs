@@ -12,9 +12,9 @@ using System.Threading;
 
 namespace WindowsGame2
 {
-    static class Program
+    public static class Program
     {
-
+        public static Hero hero;
 
         static void Main(string[] args)
         {

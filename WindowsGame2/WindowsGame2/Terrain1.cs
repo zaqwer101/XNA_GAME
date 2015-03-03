@@ -20,7 +20,7 @@ namespace WindowsGame2
             this.texture = texture;
         }
 
-        public TPoint[,] points = new TPoint[16,12];
+        public TPoint[,] points = new TPoint[17,13];
         public  void TFill()
         {
             int ii=0, ff=0;

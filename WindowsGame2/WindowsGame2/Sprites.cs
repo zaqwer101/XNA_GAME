@@ -32,27 +32,47 @@ namespace WindowsGame2
 
         public int LocateNear(string name) //0 - нет, 1 - справа, 2 - слева, 3 - снизу, 4 - сверху
         {
+            int a = 0;
             try
             {
+
                 if (Game1.terain1.points[Convert.ToInt32((this.spritePosition.X + 50) / 50f), Convert.ToInt32(this.spritePosition.Y / 50f)].name == name)
+                {
+                    a = 1;
                     return 1;
+                }
                 else
-                    if (Game1.terain1.points[Convert.ToInt32((this.spritePosition.X - 50) / 50f), Convert.ToInt32(this.spritePosition.Y / 50f)].name == name)
+                    if (Game1.terain1.points[Convert.ToInt32((this.spritePosition.X - 50) / 50f), Convert.ToInt32(this.spritePosition.Y / 50f)].name == name & Program.hero.spritePosition.X-50>0)
+                    {
+                        a = 2;
                         return 2;
+                    }
                     else
                         if (Game1.terain1.points[Convert.ToInt32((this.spritePosition.X) / 50f), Convert.ToInt32((this.spritePosition.Y + 50) / 50f)].name == name)
-                            return 3;
+                        {
+                            a = 3;
+                            return 3; 
+                        }
                         else
                             if (Game1.terain1.points[Convert.ToInt32((this.spritePosition.X) / 50f), Convert.ToInt32((this.spritePosition.Y - 50) / 50f)].name == name)
+                            {
+                                a = 4;
                                 return 4;
+                                
+                            }
                             else
+                            {
+                                a = 0;
                                 return 0;
+                            }
             }
             catch
             {
-                return 0;
+                return a;
             }
                     
-        }   
+        }
+
+        
+        }
     }
-}

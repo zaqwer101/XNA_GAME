@@ -82,6 +82,9 @@
       <DependentUpon>Action.cs</DependentUpon>
     </Compile>
     <Compile Include="Creature.cs" />
+    <Compile Include="Hero.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Item_material.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
